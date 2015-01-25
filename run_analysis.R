@@ -17,9 +17,7 @@ meanSTD<-function(){
     means<-features[grep("mean()",features$V2,fixed=TRUE),]
     std<-features[grep("std()",features$V2,fixed=TRUE),]
     
-    #'row binds the mean,std data frames then arranges them in ascending order by the
-    #'numerical index provided in features.txt (1st column). Arranging helps ensure
-    #'the correct names are assigned to each set of measurements.
+    #'row binds the mean,std data frames then arranges them in ascending order.
     meanStd<-rbind(means,std)
     meanStd<-arrange(meanStd,V1)
     
@@ -46,15 +44,12 @@ activityName<-function(y){
     #'Reads the Activity labels data set into an 'act' data frame.
     act<-read.table("UCI HAR Dataset/activity_labels.txt",stringsAsFactors=FALSE)
     
-    #'This for loop checks through each number one at a time in the activity labels set. The numeric
-    #'Activities' list (y) is subsetted by rows for each number. The corresponding label for each
-    #'number is assigned in place of the number in the numeric 'Activities' list subset. 
+    #'This for loop checks through each number one at a time in the activity labels set. 
     for (i in 1:nrow(act)) {
       y[y$V1==i,]<-act[act$V1==i,"V2"]
     }
     
-    #'Assigns the column name 'Activity' to the result set of Activity labels and returns
-    #'the Activity labels as a data frame with char values.
+    #'Assigns the column name 'Activity' to the result set of Activity labels and returns.
     names(y)<-"Activity"
     y
 }
@@ -65,7 +60,6 @@ clean<-function(name){
     #'measurement variables for mean() and std().
   
     #'reads in subject, measurements and activity data from train or test directory.
-    #'(specified in argument)
     subject<-read.table(paste("UCI HAR Dataset/",name,"/subject_",name,".txt",sep=""),stringsAsFactors=FALSE)
     X<-read.table(paste("UCI HAR Dataset/",name,"/X_",name,".txt",sep=""),stringsAsFactors=FALSE)
     y<-read.table(paste("UCI HAR Dataset/",name,"/y_",name,".txt",sep=""),stringsAsFactors=FALSE)
@@ -73,9 +67,8 @@ clean<-function(name){
     #'gets mean(), std() variables' indices and names from features.txt and assigns to cols
     cols<-meanSTD()
     
-    #'Uses indices (numeric vector) in the data frame of mean, std variables (cols) to 
-    #'preserves those columns only in the measurements data frame. This step also 
-    #'assigns the names retrieved in cols to the measurements data frame.
+    #'Uses indices (numeric vector) to preserve mean() and std() columns in the measurements
+    #'data frame. Also assigned the variable names to the column.
     preserve<-cols[,1]
     X<-X[,preserve]
     names(X)<-cols[,2]
@@ -100,9 +93,7 @@ run_analysis<-function(){
     train<-clean("train")
     mergedData<-rbind(test,train)
     
-    #'groups the data by Subject then Activity for the summary table. Summarise_each
-    #'is used from column 3 to the last column on the grouped data frames, to find mean
-    #'for each subject in a given activity for each measurement.
+    #'groups the data by Subject then Activity and makes/returns the summary table of means.
     grouped<-group_by(group_by(mergedData,Subject,add=TRUE),Activity,add=TRUE)
     summary<-summarise_each(grouped,funs(mean),3:ncol(grouped))
     summary
