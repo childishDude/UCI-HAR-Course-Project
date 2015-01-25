@@ -1,10 +1,11 @@
 ###Design
-######This code book contains information on each variable in the tidy data set "tidyDataSummary.txt". All of the following variables, except the 'Subject' and 'Activity' variables, are means of a set of measurements collected in the 'UCI HAR Dataset'.
-######For example, 'timeBodyAccelerationMeanX' in this data set is the mean of a set of 'timeBodyAccelerationMeanX' measurements collected for a given 'Subject' and 'Activity'. The sets of measurements are available in the 'UCI HAR Dataset', collected from a Smartphone (Samsung Galaxy S II) gyroscope and accelerometer
-######All the measurements in the 'UCI HAR Dataset' are normalized to be within the range [-1,1]. Therefore the measurements here do not contain any units. Each meaurement is captured in the time domain or frequency domain in different axial directions (XYZ).
+* ######This code book contains information on each variable in the tidy data set "tidyDataSummary.txt". All of the following variables, except the 'Subject' and 'Activity' variables, are means of a set of measurements collected in the 'UCI HAR Dataset'.
+* ######For example, 'timeBodyAccelerationMeanX' in this data set is the mean of a set of 'timeBodyAccelerationMeanX' measurements collected for a given 'Subject' and 'Activity'. The sets of measurements are available in the 'UCI HAR Dataset', collected from a Smartphone (Samsung Galaxy S II) gyroscope and accelerometer
+* ######All the measurements in the 'UCI HAR Dataset' are normalized to be within the range [-1,1]. Therefore the measurements here do not have any units (relative measures). Each meaurement is captured in the time domain or frequency domain in different axial directions (XYZ).
+
 ###CodeBook
 1.	Subject
- *  A categorical numerical variable 1-30 denoting each volunteer involved in the experiment. Each volunteer performed every activity, wuth a smartphone o their waist from which all the measurements were collected/calculated.
+ *  A categorical numerical variable 1-30 for each volunteer involved in the experiment. Each volunteer performed every activity, with a smartphone on their waist from which all the measurements were collected/calculated.
 2.	Activity
  *  6 categorical variables, each describing an Activity performed, from which the measurements were collected
         * Walking  
